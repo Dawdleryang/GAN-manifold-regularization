@@ -39,9 +39,12 @@ Bad GAN  | 4.25 +/- 0.03 | 14.41 +/- 0.30
 Ours | **4.51 +/- 0.22**| **14.45 +/- 0.21**
 
 ## New for IC Design
-1) To run the supervised FC classification, use
+1) To run the supervised FC classification
+
     Python3 ICDesign.py    #you can play with 2 classes or 3 classes classification 
+    
 2) To run the semi-supervised GAN classification 
+
     python3 train_ic.py --mode train --epoch 100 --labeled 10    # you can specify the labelled number per class by the parameter --labeled 
 
 
