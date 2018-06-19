@@ -12,6 +12,7 @@ import sys
 from sklearn import preprocessing 
 from sklearn.preprocessing import StandardScaler 
 
+CLASSES = 2
 
 np.random.seed(2018)
 
@@ -67,8 +68,7 @@ def linear_decay(decay_start, decay_end, epoch):
     return min(-1 / (decay_end - decay_start) * epoch + 1 + decay_start / (decay_end - decay_start),1)
 
 
-CLASSES = 2
-CLS_FLAG = True
+
 
 def read_data(csv_file):
     data = pd.read_csv(csv_file)
@@ -80,26 +80,16 @@ def read_data(csv_file):
     output[np.where(output=='near')] = 1  #45-50
     output[np.where(output=='fail')] = 2  #45 below 
 
-    if not CLS_FLAG:
-        output_reg = data.iloc[:,9]
-        output_reg = np.array(output_reg)
-    
+  
 
     if CLASSES==2:
         X = input[np.where(output<2)] 
-        if CLS_FLAG:
-            Y = output[np.where(output<2)] 
-        else:
-            Y = output_reg[np.where(output<2)] 
+        Y = output[np.where(output<2)] 
     else:
         X = input 
-        if CLS_FLAG:
-            Y = output
-        else:
-            Y = output_reg
-    
+        Y = output
 
-    #X_scaled = preprocessing.scale(X,axis=1)
+
     scaler = StandardScaler() 
     X_scaled = scaler.fit_transform(X)
     return X_scaled, Y
@@ -129,9 +119,6 @@ def main(_):
     testx = input[nTr:]
     testy = output[nTr:]
   
-    #import pdb; pdb.set_trace()
-
-
     trainx_unl = trainx.copy()
     trainx_unl2 = trainx.copy()
     nr_batches_train = int(trainx.shape[0] / FLAGS.batch_size)
