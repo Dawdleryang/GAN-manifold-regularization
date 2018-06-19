@@ -12,6 +12,7 @@ from keras.layers import LSTM, Dense
 from keras.callbacks import ReduceLROnPlateau, EarlyStopping
 from keras.utils import np_utils
 scaler = StandardScaler()
+CLASSES = 2
 
 def confusion_matrix(y, y_pred):
     TN = 0
@@ -55,12 +56,13 @@ def read_data(csv_file):
     print("No. of pass - " + str(np.sum(output == 0)))
     print("No. of near - " + str(np.sum(output == 2)))
     print("No. of fail - " + str(np.sum(output == 1)))
-
-    # X = input[np.where(output < 2)]
-    X = input
+    if CLASSES==2:
+        X = input[np.where(output < 2)]
+        Y = output[np.where(output < 2)]
+    else:
+        X = input
+        Y = output
     # print(X.shape)
-    Y = output
-    # Y = output[np.where(output < 2)]
     # print(Y.shape)
     return X, Y
 
