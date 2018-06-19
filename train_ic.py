@@ -139,9 +139,9 @@ def main(_):
     print("Data:")
     print('train examples %d, nr batch training %d, test examples %d, nr batch testing %d' \
           % (trainx.shape[0], nr_batches_train, testx.shape[0], nr_batches_test))
-    print('histogram train', np.histogram(trainy, bins=2)[0])
-    print('histogram test ', np.histogram(testy, bins=2)[0])
-    print("histogram labeled", np.histogram(tys, bins=2)[0])
+    print('histogram train', np.histogram(trainy, bins=CLASSES)[0])
+    print('histogram test ', np.histogram(testy, bins=CLASSES)[0])
+    print("histogram labeled", np.histogram(tys, bins=CLASSES)[0])
     print("")
 
     '''construct graph'''
