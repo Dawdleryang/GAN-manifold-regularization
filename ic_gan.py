@@ -3,6 +3,8 @@
 import tensorflow as tf
 import nn  # OpenAI implemetation of weightnormalization (Salimans & Kingma)
 
+CLASSES = 2
+
 init_kernel = tf.random_normal_initializer(mean=0, stddev=0.05)
 
 
@@ -50,7 +52,7 @@ def discriminator(inp, is_training, init=False, reuse=False, getter =None):
         name_y = 'y_fc_logits'
         with tf.variable_scope(name_y):
             logits = tf.layers.dense(y,
-                                     2,
+                                     CLASSES,
                                      kernel_initializer=init_kernel)
 
         return logits, intermediate_layer
