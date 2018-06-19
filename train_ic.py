@@ -130,7 +130,7 @@ def main(_):
     trainy = trainy[inds]
     txs = []
     tys = []
-    for j in range(2):
+    for j in range(CLASSES):
         txs.append(trainx[trainy == j][:FLAGS.labeled])
         tys.append(trainy[trainy == j][:FLAGS.labeled])
     txs = np.concatenate(txs, axis=0)
